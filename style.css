@@ -267,6 +267,45 @@ body {
     margin: 14px 0 4px;
 }
 
+/* Multiple roles at one company (e.g. intern -> contract) */
+.company-title {
+    color: #1f2937;
+    text-decoration: none;
+}
+
+.company-title:hover {
+    color: #3b82f6;
+}
+
+.role-progression {
+    border-left: 2px solid #bfdbfe;
+    padding-left: 12px;
+    margin: 6px 0 10px;
+}
+
+.role-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    padding: 2px 0;
+}
+
+.role-title {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #374151;
+}
+
+.role-type {
+    font-weight: 500;
+    color: #6b7280;
+}
+
+.role-row .date {
+    font-size: 0.88rem;
+}
+
 .advisor {
     font-size: 0.9rem;
     color: #6b7280;
@@ -438,7 +477,8 @@ body {
     .top-grid {
         grid-template-columns: 1fr;
     }
-    .timeline-header {
+    .timeline-header,
+    .role-row {
         flex-direction: column;
         gap: 4px;
     }
