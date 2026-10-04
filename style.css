@@ -404,18 +404,21 @@ body {
 }
 
 /* Award entries with a certificate thumbnail */
-#awards .award-item {
+#awards .award-item,
+#extracurricular .award-item {
     display: flex;
     align-items: center;
     gap: 22px;
 }
 
-#awards .award-thumb {
+#awards .award-thumb,
+#extracurricular .award-thumb {
     flex: 0 0 170px;
     width: 170px;
 }
 
-#awards .award-thumb img {
+#awards .award-thumb img,
+#extracurricular .award-thumb img {
     display: block;
     width: 100%;
     height: 124px;
@@ -427,22 +430,26 @@ body {
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-#awards .award-thumb a:hover img {
+#awards .award-thumb a:hover img,
+#extracurricular .award-thumb a:hover img {
     border-color: #3b82f6;
     box-shadow: 0 2px 10px rgba(59, 130, 246, 0.18);
 }
 
-#awards .award-body {
+#awards .award-body,
+#extracurricular .award-body {
     flex: 1;
     min-width: 0;
 }
 
 @media (max-width: 700px) {
-    #awards .award-item {
+    #awards .award-item,
+#extracurricular .award-item {
         flex-direction: column;
         gap: 14px;
     }
-    #awards .award-thumb {
+    #awards .award-thumb,
+#extracurricular .award-thumb {
         flex: 0 0 auto;
         width: 100%;
         max-width: 260px;
