@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300&display=swap">
-    <link rel="stylesheet" href="style.css?v=20261004">
+    <link rel="stylesheet" href="style.css?v=20261006">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -217,30 +217,41 @@
 
             <section class="card" id="publications">
                 <h2><i class="fa-solid fa-book-open"></i> Publication & Conferences</h2>
-                <div class="timeline-item">
-                    <div class="timeline-header">
-                        <h3>PointWAM: 3D World Action Modeling for Dexterous Robotic Manipulation</h3>
-                        <span class="date">Seoul, October 2026</span>
+                <div class="timeline-item pub-item">
+                    <a class="pub-thumb" href="https://chrockey.github.io/PointWAM/" target="_blank" aria-label="PointWAM project page">
+                        <img src="pointwam_thumb.webp" alt="PointWAM 3D point trajectories of scene and hands" loading="lazy">
+                        <video class="pub-hover" src="pointwam.mp4" muted loop playsinline preload="none"></video>
+                    </a>
+                    <div class="pub-body">
+                        <div class="timeline-header">
+                            <h3>PointWAM: 3D World Action Modeling for Dexterous Robotic Manipulation</h3>
+                            <span class="date">Seoul, October 2026</span>
+                        </div>
+                        <p class="pub-authors">Chunghyun Park, Beomjun Kim, Seungcheol Park, … <span class="pub-me">Yashu Shukla</span>, Seunghoon Sim, Jinwoo Shin, Minsu Cho</p>
+                        <p class="pub-links">
+                            <a href="https://arxiv.org/abs/2610.02840" target="_blank">[Paper]</a>
+                        </p>
                     </div>
-                    <p class="pub-authors">Chunghyun Park, Beomjun Kim, Seungcheol Park, Heeseung Kwon, <span class="pub-me">Yashu Shukla</span>, Seunghoon Sim, Jinwoo Shin, Minsu Cho</p>
-                    <p class="pub-links">
-                        <a href="https://arxiv.org/abs/2610.02840" target="_blank">[Paper]</a>
-                    </p>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-header">
-                        <h3>RLDX-1 Technical Report</h3>
-                        <span class="date">Seoul, May 2026</span>
+                <div class="timeline-item pub-item">
+                    <a class="pub-thumb" href="RLDX1.png" target="_blank" aria-label="RLDX-1 overview figure">
+                        <img src="rldx1_thumb.jpg" alt="RLDX-1 overview: training data, capabilities and benchmarks" loading="lazy">
+                    </a>
+                    <div class="pub-body">
+                        <div class="timeline-header">
+                            <h3>RLDX-1 Technical Report</h3>
+                            <span class="date">Seoul, May 2026</span>
+                        </div>
+                        <p class="pub-authors">Dongyoung Kim, Myungkyu Koo, … <span class="pub-me">Yashu Shukla</span>, … Yeonjae Lee, Jinwoo Shin</p>
+                        <p class="pub-links">
+                            <a href="https://arxiv.org/abs/2605.03269" target="_blank">[Paper]</a>
+                            <a href="https://github.com/RLWRLD/RLDX-1" target="_blank">[Code]</a>
+                        </p>
+                        <ul>
+                            <li>Contributed to research on Robot Foundation Models and Vision-Language-Action (VLA) systems for dexterous humanoid robot manipulation.</li>
+                            <li>Supported the development and evaluation of simulation-based manipulation, pick-and-place, and humanoid robot learning tasks.</li>
+                        </ul>
                     </div>
-                    <p class="pub-authors">Dongyoung Kim, Myungkyu Koo, … <span class="pub-me">Yashu Shukla</span>, … Yeonjae Lee, Jinwoo Shin</p>
-                    <p class="pub-links">
-                        <a href="https://arxiv.org/abs/2605.03269" target="_blank">[Paper]</a>
-                        <a href="https://github.com/RLWRLD/RLDX-1" target="_blank">[Code]</a>
-                    </p>
-                    <ul>
-                        <li>Contributed to research on Robot Foundation Models and Vision-Language-Action (VLA) systems for dexterous humanoid robot manipulation.</li>
-                        <li>Supported the development and evaluation of simulation-based manipulation, pick-and-place, and humanoid robot learning tasks.</li>
-                    </ul>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-header">
@@ -332,6 +343,6 @@
 
     <button class="back-to-top" id="backToTop" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
 
-    <script src="script.js"></script>
+    <script src="script.js?v=20261006"></script>
 </body>
 </html>

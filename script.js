@@ -83,4 +83,27 @@ document.addEventListener('DOMContentLoaded', function () {
             el.style.transitionDelay = ((i % 5) * 70) + 'ms';
         });
     }
+    /* ---- Publication thumbnails: play the clip on hover (or while on screen for touch) ---- */
+    var canHover = window.matchMedia('(hover: hover)').matches;
+    document.querySelectorAll('#publications .pub-item').forEach(function (item) {
+        var video = item.querySelector('.pub-hover');
+        if (!video) return;
+        function play() {
+            item.classList.add('active');
+            video.play().catch(function () {});
+        }
+        function stop() {
+            item.classList.remove('active');
+            video.pause();
+            video.currentTime = 0;
+        }
+        if (canHover) {
+            item.addEventListener('mouseenter', play);
+            item.addEventListener('mouseleave', stop);
+        } else if ('IntersectionObserver' in window) {
+            new IntersectionObserver(function (entries) {
+                entries.forEach(function (e) { e.isIntersecting ? play() : stop(); });
+            }, { threshold: 0.6 }).observe(item);
+        }
+    });
 });
