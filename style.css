@@ -354,9 +354,9 @@ body {
 
 /* Tight, even vertical rhythm inside publication entries
    (id-scoped so it beats .card p's 15px bottom margin) */
-#publications .pub-authors { margin: 2px 0 6px; }
+#publications .pub-authors { margin: 2px 0 2px; }
 #publications .pub-venue   { margin: 0 0 6px; }
-#publications .pub-links   { margin: 8px 0 10px; }
+#publications .pub-links   { margin: 0 0 10px; }
 #publications ul           { margin: 0 0 0 20px; }
 
 /* Publication with a thumbnail that plays a clip on hover */
