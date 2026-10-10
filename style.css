@@ -186,7 +186,19 @@ body {
 .skills-grid {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 14px;
+}
+
+/* Label on the left, pill tags on the right */
+.skills-grid .skill-group {
+    display: flex;
+    align-items: first baseline;
+    gap: 18px;
+}
+
+.skills-grid .skill-group h4 {
+    flex: 0 0 125px;
+    margin-bottom: 0;
 }
 
 .skill-group {
@@ -542,6 +554,13 @@ body {
         gap: 10px;
         align-items: center;
         padding-left: 0;
+    }
+    .skills-grid .skill-group {
+        flex-direction: column;
+        gap: 6px;
+    }
+    .skills-grid .skill-group h4 {
+        flex: none;
     }
     .top-grid {
         grid-template-columns: 1fr;
