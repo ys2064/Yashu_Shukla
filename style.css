@@ -184,9 +184,9 @@ body {
 
 /* TECHNICAL SKILLS SECTION GRID */
 .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-    gap: 18px 34px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
 .skill-group {
@@ -869,20 +869,23 @@ a {
     text-decoration: underline;
 }
 
-/* Skill groups as bullet lists */
+/* Skill groups as pill tags */
 .skill-list {
     margin: 0;
-    padding-left: 18px;
-    list-style: disc;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
 }
 
 .skill-list li {
-    font-size: 0.95rem;
-    color: #1f2937;
+    font-size: 0.88rem;
     font-weight: 500;
-    margin-bottom: 4px;
-}
-
-.skill-list li:last-child {
-    margin-bottom: 0;
+    color: #1f2937;
+    background: #eff6ff;
+    border: 1px solid #dbeafe;
+    border-radius: 999px;
+    padding: 5px 13px;
+    white-space: nowrap;
 }
