@@ -341,7 +341,7 @@ body {
 }
 
 .pub-links a {
-    margin-right: 18px;
+    margin-right: 8px;
     color: #3b82f6;
     font-weight: 600;
     font-size: 0.9rem;
@@ -829,4 +829,39 @@ a {
 .back-to-top:hover {
     background: #2563eb;
     transform: translateY(-3px);
+}
+/* News section: dated one-liners */
+.news-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.news-item {
+    display: flex;
+    gap: 18px;
+    align-items: baseline;
+}
+
+.news-date {
+    flex: 0 0 76px;
+    font-size: 0.92rem;
+    color: #6b7280;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.news-text {
+    font-size: 0.98rem;
+    color: #374151;
+}
+
+.news-text a {
+    color: #3b82f6;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.news-text a:hover {
+    text-decoration: underline;
 }
