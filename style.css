@@ -868,3 +868,21 @@ a {
 .news-text a:hover {
     text-decoration: underline;
 }
+
+/* Skill groups as bullet lists */
+.skill-list {
+    margin: 0;
+    padding-left: 18px;
+    list-style: disc;
+}
+
+.skill-list li {
+    font-size: 0.95rem;
+    color: #1f2937;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.skill-list li:last-child {
+    margin-bottom: 0;
+}
