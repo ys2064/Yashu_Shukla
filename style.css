@@ -112,10 +112,12 @@ body {
 .contact-bar {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 30px;
     border-top: 1px solid #374151;
     padding-top: 20px;
+    /* 175px photo + 35px gap: lines up with the subtitle text column */
+    padding-left: 210px;
 }
 
 .contact-bar p {
@@ -539,6 +541,7 @@ body {
         flex-direction: column;
         gap: 10px;
         align-items: center;
+        padding-left: 0;
     }
     .top-grid {
         grid-template-columns: 1fr;
