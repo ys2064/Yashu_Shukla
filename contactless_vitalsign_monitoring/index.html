@@ -174,21 +174,20 @@ h2.title { margin-top: 8px; font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 
 .why p { margin-top: 6px; font-size: 0.93rem; color: var(--text-2); }
 @media (max-width: 860px) { .why { grid-template-columns: 1fr; } }
 
-/* ---------- scrollytelling pipeline ---------- */
-.story { display: grid; grid-template-columns: 1fr 1.1fr; gap: 48px; margin-top: 36px; }
-.story .steps { padding-bottom: 30vh; }
+/* ---------- pipeline steps ---------- */
+.story { margin-top: 32px; }
+.story .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 .step {
-    min-height: 62vh; display: flex; flex-direction: column; justify-content: center;
-    opacity: 0.32; transition: opacity 0.4s;
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+    box-shadow: var(--shadow); padding: 22px 22px 20px;
 }
-.step.on { opacity: 1; }
 .step .n {
     font-family: var(--mono); font-size: 0.8rem; font-weight: 500; color: var(--accent);
     display: inline-flex; align-items: center; gap: 10px;
 }
 .step .n::after { content: ''; width: 40px; height: 1px; background: currentColor; opacity: 0.5; }
-.step h3 { margin-top: 8px; font-size: 1.4rem; letter-spacing: -0.01em; }
-.step p { margin-top: 10px; color: var(--text-2); }
+.step h3 { margin-top: 8px; font-size: 1.12rem; letter-spacing: -0.01em; }
+.step p { margin-top: 8px; color: var(--text-2); font-size: 0.93rem; }
 .step .chips { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 6px; }
 .chip {
     font-family: var(--mono); font-size: 0.76rem; padding: 4px 10px; border-radius: 999px;
@@ -196,20 +195,8 @@ h2.title { margin-top: 8px; font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 
 }
 .chip.hr { color: var(--hr); border-color: color-mix(in srgb, var(--hr) 40%, transparent); background: color-mix(in srgb, var(--hr) 9%, transparent); }
 .chip.br { color: var(--br); border-color: color-mix(in srgb, var(--br) 40%, transparent); background: color-mix(in srgb, var(--br) 9%, transparent); }
-
-.stage { position: sticky; top: 90px; height: calc(100vh - 130px); max-height: 600px; display: flex; flex-direction: column; gap: 14px; }
-.viz { flex: 1; position: relative; overflow: hidden; }
-.viz canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
-.viz .cap {
-    position: absolute; left: 16px; bottom: 14px; right: 16px;
-    font-family: var(--mono); font-size: 0.76rem; color: var(--text-3);
-}
-@media (max-width: 900px) {
-    .story { grid-template-columns: 1fr; gap: 0; }
-    .stage { order: -1; top: 56px; height: 300px; z-index: 5; background: var(--bg); padding: 10px 0; }
-    .step { min-height: 46vh; }
-    .viz .cap { display: none; }
-}
+@media (max-width: 900px) { .story .steps { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .story .steps { grid-template-columns: 1fr; } }
 
 /* ---------- method flowcharts ---------- */
 .methods { display: flex; flex-direction: column; gap: 22px; margin-top: 36px; }
@@ -383,12 +370,6 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
         <span class="eyebrow"><span class="dot"></span>Graduation Project · Hanyang University · 2025</span>
         <h1>Contactless Vital-Sign Monitoring: <span class="grad">Benchmarking Denoising Frameworks</span> for mmWave Radar</h1>
         <p class="sub">Heart rate and breathing rate from a 77 GHz radar, with no wearable and no contact. We compare three ways of removing the noise that gets in the way.</p>
-        <div class="authors">
-            <span>Malak Zriouli</span>
-            <span class="me"><a href="../">Yashu Shukla</a></span>
-            <span>Youngtae Noh</span>
-        </div>
-        <div class="affil">Department of Data Science, Hanyang University, Seoul</div>
         <div class="btns">
             <a class="btn" href="paper.pdf" target="_blank"><i class="fa-solid fa-file-pdf"></i>Paper</a>
         </div>
@@ -426,51 +407,45 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
         <div class="rv">
             <div class="kicker">Signal pipeline</div>
             <h2 class="title">From radar echoes to a heartbeat</h2>
-            <p class="lead">All three methods share the same preprocessing. Scroll through the steps to see the signal take shape.</p>
+            <p class="lead">All three methods share the same preprocessing steps.</p>
         </div>
         <div class="story">
             <div class="steps" id="steps">
-                <div class="step" data-step="0">
+                <div class="step rv" data-step="0">
                     <span class="n">01 / 06</span>
                     <h3>Capture FMCW chirps</h3>
                     <p>The TI AWR1642BOOST transmits frequency-modulated chirps sweeping 77 → 81 GHz. The echo off the chest comes back slightly delayed, and its phase encodes the chest's tiny back-and-forth motion.</p>
                     <div class="chips"><span class="chip">77–81 GHz</span><span class="chip">2 TX × 4 RX</span><span class="chip">128 chirps / frame</span></div>
                 </div>
-                <div class="step" data-step="1">
+                <div class="step rv" data-step="1">
                     <span class="n">02 / 06</span>
                     <h3>Decode I/Q into frames</h3>
                     <p>Raw binary radar data is loaded, the interleaved in-phase / quadrature samples are converted to complex numbers, and everything is reshaped into frames × chirps × ADC samples × virtual antennas.</p>
                     <div class="chips"><span class="chip">250 ADC samples</span><span class="chip">1200 frames</span><span class="chip">50 ms / frame</span></div>
                 </div>
-                <div class="step" data-step="2">
+                <div class="step rv" data-step="2">
                     <span class="n">03 / 06</span>
                     <h3>Find the chest's range bin</h3>
                     <p>A range FFT turns each chirp into a distance profile. We pick the bin containing the chest and tune it for every scenario, because even a small misalignment picks up background clutter instead of breathing.</p>
                     <div class="chips"><span class="chip">40–160 cm</span><span class="chip">tuned per scenario</span></div>
                 </div>
-                <div class="step" data-step="3">
+                <div class="step rv" data-step="3">
                     <span class="n">04 / 06</span>
                     <h3>Fuse the antennas</h3>
                     <p>Each virtual antenna sees its own multipath and angle-dependent noise. Averaging the phase across all eight antennas, frame by frame, cancels much of that noise and keeps the shared chest motion.</p>
                     <div class="chips"><span class="chip">8 virtual antennas</span><span class="chip">phase averaging</span></div>
                 </div>
-                <div class="step" data-step="4">
+                <div class="step rv" data-step="4">
                     <span class="n">05 / 06</span>
                     <h3>Unwrap and detrend</h3>
                     <p>Phase wraps around at ±π, so it is unwrapped to remove the jumps, then detrended to remove slow drift. What remains is the chest displacement signal itself.</p>
                     <div class="chips"><span class="chip">phase unwrap</span><span class="chip">detrend</span></div>
                 </div>
-                <div class="step" data-step="5">
+                <div class="step rv" data-step="5">
                     <span class="n">06 / 06</span>
                     <h3>Split into breath and heart</h3>
                     <p>Band-pass filters matched to adult physiology separate the slow breathing rhythm from the much smaller, faster heartbeat. These two signals feed each of the three methods.</p>
                     <div class="chips"><span class="chip br">BR 0.1–0.6 Hz</span><span class="chip hr">HR 0.8–2.0 Hz</span></div>
-                </div>
-            </div>
-            <div class="stage">
-                <div class="card viz">
-                    <canvas id="pipeViz" aria-label="Animated illustration of the current preprocessing step"></canvas>
-                    <div class="cap" id="vizCap"></div>
                 </div>
             </div>
         </div>
@@ -695,7 +670,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
 
 <footer>
     <div class="wrap">
-        <span>© 2025 Malak Zriouli, Yashu Shukla, Youngtae Noh</span>
+        <span>Contactless Vital-Sign Monitoring · 2025</span>
         <a href="../"><i class="fa-solid fa-arrow-left"></i> Back to Yashu Shukla's CV</a>
     </div>
 </footer>
@@ -775,96 +750,6 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
             if (!reduce) requestAnimationFrame(draw);
         }
         requestAnimationFrame(draw);
-    })();
-
-    /* ---------- pipeline scrollytelling ---------- */
-    (function () {
-        var caps = ['TX chirp vs. delayed RX echo', 'Complex samples: I (in-phase) and Q (quadrature)', 'Range profile: the peak marks the chest', '8 noisy antenna phases → one fused signal', 'Wrapped phase (grey) → unwrapped & detrended', 'Band-passed breathing and heartbeat signals'];
-        var capEl = document.getElementById('vizCap');
-        var cur = 0, prev = 0, tSwitch = 0;
-        function setStep(k) {
-            if (k === cur) return;
-            prev = cur; cur = k; tSwitch = performance.now();
-            document.querySelectorAll('.step').forEach(function (s) { s.classList.toggle('on', +s.dataset.step === k); });
-            capEl.textContent = caps[k];
-        }
-        document.querySelector('.step').classList.add('on'); capEl.textContent = caps[0];
-        var so = new IntersectionObserver(function (es) {
-            es.forEach(function (e) { if (e.isIntersecting) setStep(+e.target.dataset.step); });
-        }, { rootMargin: '-45% 0px -45% 0px' });
-        document.querySelectorAll('.step').forEach(function (s) { so.observe(s); });
-
-        var c = document.getElementById('pipeViz'), x = c.getContext('2d'), w, h;
-        function size() { var d = Math.min(2, devicePixelRatio || 1); w = c.clientWidth; h = c.clientHeight; c.width = w * d; c.height = h * d; x.setTransform(d, 0, 0, d, 0, 0); }
-        size(); addEventListener('resize', size);
-        var rnd = []; for (var i = 0; i < 4000; i++) rnd.push(Math.random() - 0.5);
-        function line(fn, color, lw, alpha, x0, x1) {
-            x0 = x0 || 24; x1 = x1 || w - 24;
-            x.beginPath(); x.strokeStyle = color; x.lineWidth = lw || 2; x.globalAlpha = alpha == null ? 1 : alpha;
-            for (var px = x0; px <= x1; px += 2) { var y = fn((px - x0) / (x1 - x0), px); px === x0 ? x.moveTo(px, y) : x.lineTo(px, y); }
-            x.stroke(); x.globalAlpha = 1;
-        }
-        function label(t, px, py, color) { x.fillStyle = color; x.font = '500 12px "JetBrains Mono", monospace'; x.fillText(t, px, py); }
-        function chestS(u, t) { return Math.sin((u * 3 - t * 0.00035) * 6.28); }
-        function heartS(u, t) { var q = ((u * 14 - t * 0.0016) % 1 + 1) % 1; return Math.exp(-Math.pow((q - 0.3) / 0.03, 2)) - 0.3 * Math.exp(-Math.pow((q - 0.38) / 0.04, 2)); }
-        var scenes = [
-            function (t, a) { // chirps
-                var top = h * 0.18, bot = h * 0.72, per = (w - 48) / 4, d = per * 0.12;
-                function saw(off, color, lw) {
-                    x.beginPath(); x.strokeStyle = color; x.lineWidth = lw; x.globalAlpha = a;
-                    for (var k = -1; k < 5; k++) { var sx = 24 + k * per + off + ((t * 0.03) % per); x.moveTo(sx, bot); x.lineTo(sx + per * 0.8, top); }
-                    x.stroke(); x.globalAlpha = 1;
-                }
-                x.save(); x.beginPath(); x.rect(24, 0, w - 48, h); x.clip();
-                saw(0, css('--accent'), 2.5); saw(d, css('--hr'), 2);
-                x.restore();
-                x.globalAlpha = a; label('TX 77→81 GHz', 28, top - 10, css('--accent')); label('RX echo (delayed)', 28, bot + 22, css('--hr'));
-                x.strokeStyle = css('--text-3'); x.setLineDash([3, 4]); x.beginPath(); x.moveTo(24, bot); x.lineTo(w - 24, bot); x.stroke(); x.setLineDash([]); x.globalAlpha = 1;
-            },
-            function (t, a) { // IQ
-                var m = h * 0.45;
-                line(function (u, px) { var p = 2.2 * chestS(u, t) + 0.6 * heartS(u, t); return m - 60 * Math.cos(p + u * 9) - rnd[px | 0] * 14; }, css('--accent'), 2, a);
-                line(function (u, px) { var p = 2.2 * chestS(u, t) + 0.6 * heartS(u, t); return m - 60 * Math.sin(p + u * 9) - rnd[(px | 0) + 900] * 14; }, css('--m-dwt'), 2, a * 0.85);
-                x.globalAlpha = a; label('I', 30, h * 0.14, css('--accent')); label('Q', 50, h * 0.14, css('--m-dwt')); x.globalAlpha = 1;
-            },
-            function (t, a) { // range profile
-                var nb = 40, bw = (w - 48) / nb, base = h * 0.8, chest = 13;
-                for (var i = 0; i < nb; i++) {
-                    var v = 0.12 + Math.abs(rnd[i * 7]) * 0.35 + Math.exp(-Math.pow((i - chest) / 1.3, 2)) * (0.85 + 0.08 * Math.sin(t * 0.004)) + Math.exp(-Math.pow((i - 30) / 1.8, 2)) * 0.35;
-                    x.globalAlpha = a * (i === chest ? 1 : 0.55);
-                    x.fillStyle = i === chest ? css('--hr') : css('--text-3');
-                    var bh = v * h * 0.55; x.fillRect(24 + i * bw + 1, base - bh, bw - 2, bh);
-                }
-                x.globalAlpha = a; label('chest bin', 24 + chest * bw - 24, h * 0.14, css('--hr')); label('wall clutter', 24 + 30 * bw - 40, h * 0.42, css('--text-3'));
-                label('0 m', 24, base + 18, css('--text-3')); label('range →', w - 90, base + 18, css('--text-3')); x.globalAlpha = 1;
-            },
-            function (t, a) { // fusion
-                var m = h * 0.45;
-                for (var k = 0; k < 8; k++) line(function (u, px) { return m - 55 * chestS(u, t) - rnd[(px | 0) + k * 400] * 50 - 18 * Math.sin(u * 20 + k); }, css('--text-3'), 1, a * 0.35);
-                line(function (u, px) { return m - 55 * chestS(u, t) - rnd[(px | 0) + 3500] * 6; }, css('--accent'), 3, a);
-                x.globalAlpha = a; label('8 antennas', 28, h * 0.12, css('--text-3')); label('fused', 28, h * 0.12 + 18, css('--accent')); x.globalAlpha = 1;
-            },
-            function (t, a) { // unwrap
-                var m = h * 0.5;
-                function raw(u) { return 2.6 * chestS(u, t) + u * 9; }
-                line(function (u) { var p = raw(u); p = ((p + Math.PI) % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI) - Math.PI; return m - p * 22; }, css('--text-3'), 1.5, a * 0.7);
-                line(function (u) { return m - 2.6 * chestS(u, t) * 30; }, css('--accent'), 3, a);
-                x.globalAlpha = a; label('wrapped ±π', 28, h * 0.12, css('--text-3')); label('unwrapped + detrended', 28, h * 0.12 + 18, css('--accent')); x.globalAlpha = 1;
-            },
-            function (t, a) { // bpf
-                line(function (u) { return h * 0.3 - 46 * chestS(u, t); }, css('--br'), 3, a);
-                line(function (u) { return h * 0.7 - 42 * heartS(u, t); }, css('--hr'), 2.5, a);
-                x.globalAlpha = a; label('breathing · 0.1–0.6 Hz', 28, h * 0.08 + 6, css('--br')); label('heartbeat · 0.8–2.0 Hz', 28, h * 0.52, css('--hr')); x.globalAlpha = 1;
-            }
-        ];
-        function loop(t) {
-            x.clearRect(0, 0, w, h);
-            var p = Math.min(1, (t - tSwitch) / 450);
-            if (p < 1 && prev !== cur) scenes[prev](t, 1 - p);
-            scenes[cur](t, prev !== cur ? p : 1);
-            requestAnimationFrame(loop);
-        }
-        requestAnimationFrame(loop);
     })();
 
     /* ---------- method flowcharts ---------- */
