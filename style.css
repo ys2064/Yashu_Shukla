@@ -494,7 +494,6 @@ body {
 }
 
 .project-thumb.video { width: 200px; aspect-ratio: 16 / 9; }
-.project-thumb.poster { width: 112px; aspect-ratio: 3179 / 4494; }
 .project-thumb.figure { width: 200px; aspect-ratio: 16 / 9; }
 .project-thumb.figure img { object-fit: contain; object-position: center; padding: 4px; }
 
@@ -536,7 +535,6 @@ body {
     .project-body { grid-template-columns: 1fr; }
     .project-body > .project-date { grid-column: 1; grid-row: auto; }
     .project-thumb.video { width: 100%; max-width: 320px; }
-    .project-thumb.poster { width: 160px; }
     .project-thumb.figure { width: 100%; max-width: 320px; }
 }
 
