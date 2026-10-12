@@ -493,9 +493,9 @@ body {
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.project-thumb.video { width: 220px; aspect-ratio: 16 / 9; }
-.project-thumb.poster { width: 130px; aspect-ratio: 3179 / 4494; }
-.project-thumb.figure { width: 220px; aspect-ratio: 16 / 9; }
+.project-thumb.video { width: 200px; aspect-ratio: 16 / 9; }
+.project-thumb.poster { width: 112px; aspect-ratio: 3179 / 4494; }
+.project-thumb.figure { width: 200px; aspect-ratio: 16 / 9; }
 .project-thumb.figure img { object-fit: contain; object-position: center; padding: 4px; }
 
 .project-thumb img,
