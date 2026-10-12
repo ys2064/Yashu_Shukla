@@ -198,18 +198,11 @@ h2.title { margin-top: 8px; font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 
 .chip.br { color: var(--br); border-color: color-mix(in srgb, var(--br) 40%, transparent); background: color-mix(in srgb, var(--br) 9%, transparent); }
 
 .stage { position: sticky; top: 90px; height: calc(100vh - 130px); max-height: 600px; display: flex; flex-direction: column; gap: 14px; }
-.rail { display: flex; align-items: center; padding: 14px 16px; gap: 0; }
-.rail .node {
     flex: 0 0 auto; width: 30px; height: 30px; border-radius: 50%;
     display: grid; place-items: center; font-family: var(--mono); font-size: 0.75rem; font-weight: 500;
     background: var(--surface-2); color: var(--text-3); border: 1px solid var(--border);
     transition: background 0.35s, color 0.35s, border-color 0.35s, transform 0.35s;
 }
-.rail .node.done { background: var(--accent-soft); color: var(--accent); border-color: transparent; }
-.rail .node.cur { background: var(--accent); color: #fff; border-color: var(--accent); transform: scale(1.12); }
-.rail .seg { flex: 1; height: 2px; background: var(--border); position: relative; overflow: hidden; }
-.rail .seg i { position: absolute; inset: 0; background: var(--accent); transform-origin: 0 50%; transform: scaleX(0); transition: transform 0.45s ease; }
-.rail .seg.done i { transform: scaleX(1); }
 .viz { flex: 1; position: relative; overflow: hidden; }
 .viz canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
 .viz .cap {
@@ -359,17 +352,6 @@ td.win { font-weight: 700; color: var(--accent); }
 .two li + li { margin-top: 8px; }
 @media (max-width: 860px) { .two { grid-template-columns: 1fr; } }
 
-/* ---------- citation ---------- */
-.cite { margin-top: 26px; position: relative; }
-.cite pre {
-    padding: 22px 24px; overflow-x: auto; font-family: var(--mono); font-size: 0.82rem; line-height: 1.6;
-    color: var(--text); background: var(--surface-2); border-radius: var(--radius); border: 1px solid var(--border);
-}
-.cite button {
-    position: absolute; top: 12px; right: 12px; font: inherit; font-size: 0.78rem; font-weight: 600;
-    padding: 6px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface); color: var(--text-2); cursor: pointer;
-}
-.ack { margin-top: 22px; color: var(--text-2); font-size: 0.93rem; }
 footer { margin-top: 90px; padding: 30px 0 40px; border-top: 1px solid var(--border); color: var(--text-3); font-size: 0.85rem; }
 footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 
@@ -396,7 +378,6 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
             <li><a href="#methods">Methods</a></li>
             <li><a href="#results">Results</a></li>
             <li><a href="#dataset">Dataset</a></li>
-            <li><a href="#citation">Citation</a></li>
         </ul>
     </div>
 </nav>
@@ -492,7 +473,6 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
                 </div>
             </div>
             <div class="stage">
-                <div class="card rail" id="rail"></div>
                 <div class="card viz">
                     <canvas id="pipeViz" aria-label="Animated illustration of the current preprocessing step"></canvas>
                     <div class="cap" id="vizCap"></div>
@@ -716,25 +696,6 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
         </div>
     </section>
 
-    <!-- ===== Citation ===== -->
-    <section class="block" id="citation">
-        <div class="rv">
-            <div class="kicker">Citation</div>
-            <h2 class="title">BibTeX</h2>
-        </div>
-        <div class="cite rv">
-            <button id="copyBib"><i class="fa-regular fa-copy"></i> Copy</button>
-<pre id="bib">@misc{zriouli2025contactless,
-  title  = {Contactless Vital-Sign Monitoring: Benchmarking Denoising
-            Frameworks for mmWave Radar Signals},
-  author = {Zriouli, Malak and Shukla, Yashu and Noh, Youngtae},
-  year   = {2025},
-  note   = {Graduation project report, Department of Data Science,
-            Hanyang University, Seoul, South Korea}
-}</pre>
-        </div>
-        <p class="ack rv">We thank Prof. Youngtae Noh and researcher Seungyong Shin for their guidance throughout this project, and the Department of Data Science at Hanyang University for supporting this work.</p>
-    </section>
 </main>
 
 <footer>
@@ -823,22 +784,16 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
 
     /* ---------- pipeline scrollytelling ---------- */
     (function () {
-        var rail = document.getElementById('rail'), N = 6, html = '';
-        for (var i = 0; i < N; i++) { html += '<div class="node">' + (i + 1) + '</div>'; if (i < N - 1) html += '<div class="seg"><i></i></div>'; }
-        rail.innerHTML = html;
-        var nodes = rail.querySelectorAll('.node'), segs = rail.querySelectorAll('.seg');
         var caps = ['TX chirp vs. delayed RX echo', 'Complex samples: I (in-phase) and Q (quadrature)', 'Range profile: the peak marks the chest', '8 noisy antenna phases → one fused signal', 'Wrapped phase (grey) → unwrapped & detrended', 'Band-passed breathing and heartbeat signals'];
         var capEl = document.getElementById('vizCap');
         var cur = 0, prev = 0, tSwitch = 0;
         function setStep(k) {
             if (k === cur) return;
             prev = cur; cur = k; tSwitch = performance.now();
-            nodes.forEach(function (n, i) { n.classList.toggle('done', i < k); n.classList.toggle('cur', i === k); });
-            segs.forEach(function (s, i) { s.classList.toggle('done', i < k); });
             document.querySelectorAll('.step').forEach(function (s) { s.classList.toggle('on', +s.dataset.step === k); });
             capEl.textContent = caps[k];
         }
-        nodes[0].classList.add('cur'); document.querySelector('.step').classList.add('on'); capEl.textContent = caps[0];
+        document.querySelector('.step').classList.add('on'); capEl.textContent = caps[0];
         var so = new IntersectionObserver(function (es) {
             es.forEach(function (e) { if (e.isIntersecting) setStep(+e.target.dataset.step); });
         }, { rootMargin: '-45% 0px -45% 0px' });
@@ -1052,12 +1007,6 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
     });
     lb.addEventListener('click', function () { lb.classList.remove('on'); });
     addEventListener('keydown', function (e) { if (e.key === 'Escape') lb.classList.remove('on'); });
-    document.getElementById('copyBib').addEventListener('click', function () {
-        var b = this;
-        navigator.clipboard.writeText(document.getElementById('bib').textContent).then(function () {
-            b.innerHTML = '<i class="fa-solid fa-check"></i> Copied'; setTimeout(function () { b.innerHTML = '<i class="fa-regular fa-copy"></i> Copy'; }, 1600);
-        });
-    });
 })();
 </script>
 </body>
