@@ -497,8 +497,6 @@ body {
 .project-thumb.poster { width: 112px; aspect-ratio: 3179 / 4494; }
 .project-thumb.figure { width: 200px; aspect-ratio: 16 / 9; }
 .project-thumb.figure img { object-fit: contain; object-position: center; padding: 4px; }
-.project-thumb.flow { width: 260px; aspect-ratio: 720 / 152; }
-.project-thumb.flow video { object-fit: contain; object-position: center; }
 
 .project-thumb img,
 .project-thumb video {
@@ -528,7 +526,6 @@ body {
     .project-thumb.video { width: 100%; max-width: 320px; }
     .project-thumb.poster { width: 160px; }
     .project-thumb.figure { width: 100%; max-width: 320px; }
-    .project-thumb.flow { width: 100%; max-width: 360px; }
 }
 
 /* Award entries with a certificate thumbnail */
