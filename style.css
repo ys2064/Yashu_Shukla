@@ -978,3 +978,4 @@ a {
 }
 
 .pub-venue-tag { color: #3b82f6; font-weight: 600; white-space: nowrap; }
+.pub-venue-tag.black { color: #000; }
