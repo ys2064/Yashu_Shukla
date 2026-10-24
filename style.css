@@ -976,3 +976,5 @@ a {
     padding: 5px 13px;
     white-space: nowrap;
 }
+
+.pub-venue-tag { color: #3b82f6; font-weight: 600; white-space: nowrap; }
